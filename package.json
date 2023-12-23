@@ -11,9 +11,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-three/drei": "^9.92.6",
+    "@react-three/fiber": "^8.15.12",
+    "@types/three": "^0.160.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "rune-games-sdk": "^4.16.0"
+    "rune-games-sdk": "^4.16.0",
+    "three": "^0.160.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
