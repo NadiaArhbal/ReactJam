@@ -1,4 +1,3 @@
-
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, useGLTF, Stage } from "@react-three/drei"
 import { Block } from './objects/Block'
@@ -12,6 +11,12 @@ export default function Scene01() {
 				</Stage>
 				<OrbitControls enablePan={false} enableZoom={false}/>
 			</Canvas>
+			
+			<div id="ui">
+				<button id="accept">Accept</button>
+				<button id="reject">Reject</button>
+			</div>
+		
 		</>
 	)
 }

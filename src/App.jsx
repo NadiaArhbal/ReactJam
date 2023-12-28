@@ -5,7 +5,6 @@ import Scene01 from "./player01/Scene01"
 import Scene02 from "./player02/Scene02";
 
 
-
 function App() {
     const [game, setGame] = useState()
     const [playerId, setPlayerId] = useState()

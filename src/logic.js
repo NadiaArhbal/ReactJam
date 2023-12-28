@@ -2,7 +2,7 @@ Rune.initLogic({
     minPlayers: 2,
     maxPlayers: 2,
     setup: (allPlayersIds) => {
-        return { 
+        return {
             officer: allPlayersIds[0]
         }
     },
