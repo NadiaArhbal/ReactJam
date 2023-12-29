@@ -4,7 +4,6 @@ import "./App.css"
 import Scene01 from "./player01/Scene01"
 import Scene02 from "./player02/Scene02";
 
-
 function App() {
     const [game, setGame] = useState()
     const [playerId, setPlayerId] = useState()
@@ -21,8 +20,9 @@ function App() {
     if (!game) {
         return <div>Loading...</div>
     }
+
     if (game.officer === playerId) {
-        return <Scene01 game={game}></Scene01>   //envoi de l'objet game dans l'attribut game
+        return <Scene01 game={game}></Scene01>
     } else {
         return <Scene02></Scene02>
     }

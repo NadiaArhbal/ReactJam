@@ -16,15 +16,9 @@ export default function Scene01({game}) {
 
 	return (
 		<>
-			<div>
-				<span>{game.success ? "Succès :) " : "Erreur :( "}</span>
-			</div>
-
-			<div>
-				<span>{game.solution ? "ACCEPT" : "REJECT"}</span>
-			</div>
 
 			<Canvas shadows camera={{ zoom: 0.15, fov: 20 }}>
+				<color attach="background" args={["#FAD983"]} />
 				<Stage adjustCamera={false} shadows={false} preset="rembrandt" intensity={1}  environment="forest">
 					<Block />
 				</Stage>
@@ -33,6 +27,9 @@ export default function Scene01({game}) {
 
 			<div id="ui">
 				<div>
+					<div id="fail">
+						<span>Fails : {game.fails}</span>
+					</div>
 					<button id="accept" onClick={onAccept}>Accept</button>
 					<button id="reject" onClick={onReject}>Reject</button>
 				</div>

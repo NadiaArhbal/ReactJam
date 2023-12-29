@@ -1,3 +1,12 @@
+@font-face {
+    font-family: GTWalsheim;
+    src: url(GT-Walsheim-Regular-Trial-BF651b7fc71a47d.otf);
+}
+
+* {
+    font-family: GTWalsheim, sans-serif;
+}
+
 html,
 body,
 #root {
@@ -10,14 +19,25 @@ body,
 
 #accept {
     position: absolute;
-    right: 20%;
-    bottom: 5%;
+    right: 8%;
+    bottom: 6%;
+    background-color: rgb(100, 214, 113);
 }
 
 #reject {
     position: absolute;
-    left: 20%;
-    bottom: 5%;
+    left: 8%;
+    bottom: 6%;
+    background-color: rgb(229, 75, 75);
+}
+
+#fail {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 5%;
+    color: rgb(238, 81, 81);
+    font-size: 18px;
 }
 
 #ui {
@@ -31,4 +51,24 @@ body,
 
 #ui div {
     pointer-events: auto;
+}
+
+button {
+    align-items: center;
+    border-radius: 100px;
+    color: #f5f1f8;
+    display: flex;
+    flex-shrink: 0;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -.18px;
+    line-height: normal;
+    padding: 16px 32px;
+    text-decoration: none;
+    transition: box-shadow .2s ease-out;
+    border: none;
+}
+
+button:active {
+    transform: translateY(6px);
 }

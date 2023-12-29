@@ -8,7 +8,7 @@ Rune.initLogic({
             solution: Math.floor(Math.random() * 2),
             success: null,
             fails: 0,
-            players: allPlayersIds
+            players: allPlayersIds,
         }
     },
     actions: {
