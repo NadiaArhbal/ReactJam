@@ -1,10 +1,20 @@
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, useGLTF, Stage } from "@react-three/drei"
+import data from "../assets/objects.json"
+
+function getRandomInt(max) {
+	return Math.floor(Math.random() * max);
+  }
 
 export default function Scene01({game}) {
-    const model = useGLTF("/blocks/Mark01.glb");
-	const block = useGLTF("/blocks/Block01.glb");
-	const details = useGLTF("/blocks/Hole01.glb");
+
+	var model = [];
+
+	for(let i=0; i<data.parts.length; i++){
+		let random = getRandomInt(data.parts[i].occurences)+1;   //4 3 2 mark hole block
+		const t = "blocks/" + data.parts[i].name + "0" + random + ".glb";
+		model.push(useGLTF(t));
+	}
 
 	function onAccept(){
 		Rune.actions.accept();
@@ -15,14 +25,16 @@ export default function Scene01({game}) {
 		Rune.actions.reject();
 		Rune.actions.checkIfCorrect();
 	}
+	
+	let html = model.map((model, index) =>
+	<primitive key={index} object={model.scene} position={[0, 0, 0]} />
+	)
 
 	return (
 		<>
 			<Canvas shadows camera={{ zoom: 0.15, fov: 20 }}>
 				<Stage adjustCamera={false} shadows={false} preset="rembrandt" intensity={1}  environment="forest">
-					<primitive object={model.scene} position={[0,0,0]}></primitive>
-					<primitive object={block.scene} position={[0,0,0]}></primitive>
-					<primitive object={details.scene} position={[0,0,0]}></primitive>
+				{html}
 				</Stage>
 				<OrbitControls enablePan={false} enableZoom={false}/>
 			</Canvas>
