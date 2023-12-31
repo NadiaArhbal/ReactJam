@@ -1,8 +1,8 @@
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, useGLTF, Stage } from "@react-three/drei"
-import { Block } from './objects/Block'
 
 export default function Scene01({game}) {
+    const model = useGLTF("/blocks/Mark01.glb");
 
 	function onAccept(){
 		Rune.actions.accept();
@@ -16,20 +16,24 @@ export default function Scene01({game}) {
 
 	return (
 		<>
+			<div>
+				<span>{game.success ? "Succès :) " : "Erreur :( "}</span>
+				<span>{}</span>
+			</div>
+
+			<div>
+				<span>{game.solution ? "ACCEPT" : "REJECT"}</span>
+			</div>
 
 			<Canvas shadows camera={{ zoom: 0.15, fov: 20 }}>
-				<color attach="background" args={["#FAD983"]} />
 				<Stage adjustCamera={false} shadows={false} preset="rembrandt" intensity={1}  environment="forest">
-					<Block />
+					<primitive object={model.scene} position={[0,0,0]}></primitive>
 				</Stage>
 				<OrbitControls enablePan={false} enableZoom={false}/>
 			</Canvas>
 
 			<div id="ui">
 				<div>
-					<div id="fail">
-						<span>Fails : {game.fails}</span>
-					</div>
 					<button id="accept" onClick={onAccept}>Accept</button>
 					<button id="reject" onClick={onReject}>Reject</button>
 				</div>
