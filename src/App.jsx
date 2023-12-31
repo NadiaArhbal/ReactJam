@@ -24,7 +24,7 @@ function App() {
     if (game.officer === playerId) {
         return <Scene01 game={game}></Scene01>
     } else {
-        return <Scene02></Scene02>
+        return <Scene02 game={game}></Scene02>
     }
 }
 
