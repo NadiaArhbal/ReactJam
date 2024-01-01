@@ -1,5 +1,6 @@
 import data from "./assets/objects.json";
 
+//function random
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
