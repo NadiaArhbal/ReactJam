@@ -22,6 +22,7 @@ function Game({game}){  //composant react en Majuscule
 	const item  = useRef();
 	useFrame((state) => {
 		if (global == 1){
+
 			gsap.to(state.camera.position, {
 				duration:0.5,
 				ease: "power2.out",
@@ -29,6 +30,7 @@ function Game({game}){  //composant react en Majuscule
 				y: 0,
 				z: 5
 			});
+			
 			gsap.to(state.camera.rotation, {
 				duration:0.5,
 				ease: "power2.out",
@@ -40,16 +42,17 @@ function Game({game}){  //composant react en Majuscule
 			gsap.to(item.current.position, {
 				duration:1,
 				ease: "power4.out",
-				x: 5,
+				x: 5.5,
 				delay: 0.5
 			});
 
 			gsap.to(item.current.position, {
 				duration:1,
 				ease: "power1.out",
-				y: -6,
+				y: -7,
 				delay: 0.5
 			});
+			global = 4
 
 		}
 		else if (global == 2){
@@ -71,20 +74,20 @@ function Game({game}){  //composant react en Majuscule
 			gsap.to(item.current.position, {
 				duration:1,
 				ease: "power4.out",
-				x: -5,
+				x: -5.5,
 				delay: 0.5
 			});
 
 			gsap.to(item.current.position, {
 				duration:1,
 				ease: "power1.out",
-				y: -6,
+				y: -7,
 				delay: 0.5
 			});
+			global = 4
 
-		}else {
-			item.current.position.x = 0
-			item.current.position.y = 0
+		} else if (global == 0) {
+			item.current.position.set(0, 0, 0)
 		}
 	});
 	
