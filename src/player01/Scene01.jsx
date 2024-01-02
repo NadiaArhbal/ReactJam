@@ -36,9 +36,20 @@ function Game({game}){  //composant react en Majuscule
 				y: 0,
 				z: 0,
 			});
-			setTimeout(() => {
-				item.current.position.x += 0.2
-			}, 500);
+
+			gsap.to(item.current.position, {
+				duration:1,
+				ease: "power4.out",
+				x: 5,
+				delay: 0.5
+			});
+
+			gsap.to(item.current.position, {
+				duration:1,
+				ease: "power1.out",
+				y: -6,
+				delay: 0.5
+			});
 
 		}
 		else if (global == 2){
@@ -56,11 +67,24 @@ function Game({game}){  //composant react en Majuscule
 				y: 0,
 				z: 0,
 			});
-			setTimeout(() => {
-				item.current.position.x -= 0.2
-			}, 500);
+
+			gsap.to(item.current.position, {
+				duration:1,
+				ease: "power4.out",
+				x: -5,
+				delay: 0.5
+			});
+
+			gsap.to(item.current.position, {
+				duration:1,
+				ease: "power1.out",
+				y: -6,
+				delay: 0.5
+			});
+
 		}else {
 			item.current.position.x = 0
+			item.current.position.y = 0
 		}
 	});
 	
