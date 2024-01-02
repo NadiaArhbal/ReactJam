@@ -2,6 +2,7 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, useGLTF, Stage } from "@react-three/drei"
 import data from "../assets/objects.json"
 import { useRef } from 'react';
+import gsap from 'gsap';
 
 let global = 0;
 
@@ -21,14 +22,43 @@ function Game({game}){  //composant react en Majuscule
 	const item  = useRef();
 	useFrame((state) => {
 		if (global == 1){
-			item.current.position.x += 0.1
-			state.camera.rotation.set(0,0,0);
-			state.camera.position.set(0,0,5);
+			gsap.to(state.camera.position, {
+				duration:0.5,
+				ease: "power2.out",
+				x: 0,
+				y: 0,
+				z: 5
+			});
+			gsap.to(state.camera.rotation, {
+				duration:0.5,
+				ease: "power2.out",
+				x: 0,
+				y: 0,
+				z: 0,
+			});
+			setTimeout(() => {
+				item.current.position.x += 0.2
+			}, 500);
+
 		}
 		else if (global == 2){
-			item.current.position.x += -0.1
-			state.camera.rotation.set(0,0,0);
-			state.camera.position.set(0,0,5);
+			gsap.to(state.camera.position, {
+				duration:0.5,
+				ease: "power2.out",
+				x: 0,
+				y: 0,
+				z: 5
+			});
+			gsap.to(state.camera.rotation, {
+				duration:0.5,
+				ease: "power2.out",
+				x: 0,
+				y: 0,
+				z: 0,
+			});
+			setTimeout(() => {
+				item.current.position.x -= 0.2
+			}, 500);
 		}else {
 			item.current.position.x = 0
 		}
