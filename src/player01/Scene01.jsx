@@ -3,6 +3,8 @@ import { OrbitControls, useGLTF, Stage } from "@react-three/drei"
 import data from "../assets/objects.json"
 import { useRef } from 'react';
 
+let global = 0;
+
 //canva
 function Game({game}){  //composant react en Majuscule
 	
@@ -17,7 +19,22 @@ function Game({game}){  //composant react en Majuscule
 	<primitive key={index} object={model.scene} position={[0, 0, 0]} />)
 
 	const item  = useRef();
-	useFrame((state) => item.current.position.x += 0.1);
+	useFrame((state) => {
+		if (global == 1){
+			item.current.position.x += 0.1
+			state.camera.rotation.set(0,0,0);
+			state.camera.position.set(0,0,5);
+		}
+		else if (global == 2){
+			item.current.position.x += -0.1
+			state.camera.rotation.set(0,0,0);
+			state.camera.position.set(0,0,5);
+		}else {
+			item.current.position.x = 0
+		}
+	});
+	
+
 
 	return (
 		<>
@@ -34,12 +51,20 @@ export default function Scene01({game}) {
 
 	function onAccept(){
 		Rune.actions.accept();
-		Rune.actions.checkIfCorrect();
+		global = 1;
+		setTimeout(() => {
+			global=0;
+			Rune.actions.checkIfCorrect();
+		}, 1000);
 	}
 
 	function onReject(){
 		Rune.actions.reject();
-		Rune.actions.checkIfCorrect();
+		global = 2;
+		setTimeout(() => {
+			global=0;
+			Rune.actions.checkIfCorrect();
+		}, 1000);
 	}
 	
 	return (
@@ -56,7 +81,6 @@ export default function Scene01({game}) {
 				</div>
 				
 			</div>
-		
 		
 		</>
 	)
