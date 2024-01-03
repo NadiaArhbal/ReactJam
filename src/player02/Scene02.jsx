@@ -34,15 +34,19 @@ export default function Scene02({game}) {
 				<OrbitControls enablePan={false} enableZoom={false}/>
 			</Canvas>
 
-			
-			<div id="ui">
-				<div id="fail">
-     				<span>Fails : {game.fails}</span>
-				</div>
-				
+			<div id="fail">
+					{[...Array(game.fails)].map((x, i) =>
+					<svg key={i} width="2em" height="2em" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+						<path fill="#ff5a79" d="M62 10.6L53.4 2L32 23.4L10.6 2L2 10.6L23.4 32L2 53.4l8.6 8.6L32 40.6L53.4 62l8.6-8.6L40.6 32z"></path>
+					</svg>
+  				)}
 			</div>
-		
-		
+
+			<div id="ui">
+				<div id="score">
+					<span>{game.score}</span>
+				</div>
+			</div>
 		</>
 	)
 }

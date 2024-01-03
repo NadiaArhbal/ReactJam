@@ -4,6 +4,7 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
 
+//partie runsdk
 Rune.initLogic({
     minPlayers: 2,
     maxPlayers: 2,
@@ -14,6 +15,7 @@ Rune.initLogic({
             solution: 1,
             success: null,
             fails: 0,
+            score: 0,
             players: allPlayersIds,
             model1: [
                 1, 1, 1
@@ -33,7 +35,8 @@ Rune.initLogic({
         checkIfCorrect: (object, { game }) => {
 
             game.success = (game.solution == game.choice);
-            if (game.success == 0) game.fails++;
+            if (game.success == 0)
+                game.fails++;
             if (game.fails == 3) {
                 Rune.gameOver({
                     players: {
@@ -41,6 +44,10 @@ Rune.initLogic({
                         [game.players[1]]: "LOST",
                     },
                 })
+            }
+
+            if (game.success == 1) {
+                game.score += 2;
             }
 
             let random = getRandomInt(10);

@@ -33,11 +33,27 @@ body,
 
 #fail {
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 5%;
+    display: flex;
+    left: 4%;
+    width: 150px;
+    top: 3%;
     color: rgb(238, 81, 81);
     font-size: 18px;
+    justify-content: flex-start;
+    flex-direction: row;
+}
+
+#fail * {
+    padding: 2px;
+}
+
+#score {
+    position: absolute;
+    right: 10%;
+    transform: translateX(-50%);
+    top: 5%;
+    color: rgb(5, 128, 250);
+    font-size: 20px;
 }
 
 #ui {
