@@ -4,7 +4,6 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
 
-//partie runsdk
 Rune.initLogic({
     minPlayers: 2,
     maxPlayers: 2,
