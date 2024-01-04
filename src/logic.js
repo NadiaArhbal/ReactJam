@@ -22,18 +22,22 @@ Rune.initLogic({
             model2: [
                 1, 1, 1
             ],
-            roundStartAt: 0
+            roundStartAt: 0,
+            start: false
         }
     },
     actions: {
         accept: (object, { game }) => {
             game.choice = 1
         },
+        startGame: (object, { game }) => {
+            game.start = true
+        },
         reject: (object, { game }) => {
             game.choice = 0
         },
         checkIfCorrect: (object, { game }) => {
-
+            game.roundStartAt = Rune.gameTime();
             game.success = (game.solution == game.choice);
             if (game.success == 0)
                 game.fails++;
@@ -81,10 +85,9 @@ Rune.initLogic({
         },
     },
     update: ({ game }) => {
-
-        if (Rune.gameTimeInSeconds() - game.roundStartAt >= 20) {
-            console.log(game.roundStartAt);
-            game.roundStartAt = Rune.gameTimeInSeconds();
+        if (!game.start) return;
+        if (Rune.gameTime() - game.roundStartAt >= 20*1000) {
+            game.roundStartAt = Rune.gameTime();
             game.fails++;
             if (game.fails == 3) {
                 Rune.gameOver({

@@ -1,7 +1,7 @@
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, useGLTF, Stage } from "@react-three/drei"
 import data from "../assets/objects.json"
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 
 let global = 0;
@@ -90,6 +90,9 @@ function Game({game}){  //composant react en Majuscule
 			item.current.position.set(0, 0, 0)
 		}
 	});
+
+
+
 	
 
 
@@ -105,7 +108,10 @@ function Game({game}){  //composant react en Majuscule
 
 //ui ux
 export default function Scene01({game}) {
-
+	useEffect(() => {
+        Rune.actions.startGame();
+    }, [])
+	
 	function onAccept(){
 		Rune.actions.accept();
 		global = 1;
@@ -123,6 +129,14 @@ export default function Scene01({game}) {
 			Rune.actions.checkIfCorrect();
 		}, 1500);
 	}
+	let chrono = useRef();
+	const tick = () => {
+        const value = 20 - (Rune.gameTime()-game.roundStartAt) / 1000
+		if (chrono.current && game.start)
+			chrono.current.textContent = value;
+        requestAnimationFrame(tick)
+	}
+	tick();
 	
 	return (
 		<>
@@ -146,11 +160,8 @@ export default function Scene01({game}) {
 				</div>
 
 				<div id="chrono">
-					<span>{Rune.gameTimeInSeconds()-game.roundStartAt}</span>
+					<span ref={chrono}></span>
 				</div>
-				
-     
-    
 			</div>
 		
 		</>
