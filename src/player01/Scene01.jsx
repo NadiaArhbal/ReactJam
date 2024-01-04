@@ -144,6 +144,10 @@ export default function Scene01({game}) {
 				<div id="score">
 					<span>{game.score}</span>
 				</div>
+
+				<div id="chrono">
+					<span>{Rune.gameTimeInSeconds()-game.roundStartAt}</span>
+				</div>
 				
      
     

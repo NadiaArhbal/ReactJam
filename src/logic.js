@@ -21,7 +21,8 @@ Rune.initLogic({
             ],
             model2: [
                 1, 1, 1
-            ]
+            ],
+            roundStartAt: 0
         }
     },
     actions: {
@@ -50,7 +51,7 @@ Rune.initLogic({
             }
 
             let random = getRandomInt(10);
-            if (random > 8)
+            if (random > 5)
                 game.solution = 1;
             else
                 game.solution = 0;
@@ -79,4 +80,43 @@ Rune.initLogic({
 
         },
     },
+    update: ({ game }) => {
+
+        if (Rune.gameTimeInSeconds() - game.roundStartAt >= 20) {
+            console.log(game.roundStartAt);
+            game.roundStartAt = Rune.gameTimeInSeconds();
+            game.fails++;
+            if (game.fails == 3) {
+                Rune.gameOver({
+                    players: {
+                        [game.players[0]]: "LOST",
+                        [game.players[1]]: "LOST",
+                    },
+                })
+            }
+            let random = getRandomInt(2);
+            game.solution = random;
+            game.model1 = [];
+            game.model2 = [];
+
+            for (let i = 0; i < data.parts.length; i++) {
+                let random = getRandomInt(data.parts[i].occurences) + 1;
+                game.model1.push(random);
+                game.model2.push(random);
+            }
+            if (game.solution == 0) {
+                let changeOneElement = getRandomInt(data.parts.length);
+
+                let possibilities = [];
+                for (let i = 0; i < data.parts[changeOneElement].occurences; i++) {
+                    if (game.model1[changeOneElement] != i + 1) {
+                        possibilities.push(i + 1);
+                    }
+                }
+
+                let random = possibilities[getRandomInt(data.parts[changeOneElement].occurences - 1)];
+                game.model2[changeOneElement] = random;
+            }
+        }
+    }
 })

@@ -56,6 +56,13 @@ body,
     font-size: 20px;
 }
 
+#chrono {
+    position: relative;
+    font-size: 50px;
+    text-align: center;
+    padding-top: 100px;
+}
+
 #ui {
     position: fixed;
     top: 0;
