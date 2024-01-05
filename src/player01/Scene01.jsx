@@ -1,5 +1,5 @@
 import { Canvas, useFrame } from '@react-three/fiber'
-import { OrbitControls, useGLTF, Stage } from "@react-three/drei"
+import { OrbitControls, useGLTF, Stage, Environment, Preload } from "@react-three/drei"
 import data from "../assets/objects.json"
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
@@ -17,7 +17,7 @@ function Game({game}){  //composant react en Majuscule
 	}
 
 	let html = model1.map((model, index) =>
-	<primitive key={index} object={model.scene} position={[0, 0, 0]} />)
+		<primitive key={index} object={model.scene} position={[0, 0, 0]} />)
 
 	const item  = useRef();
 	useFrame((state) => {
@@ -90,29 +90,20 @@ function Game({game}){  //composant react en Majuscule
 			item.current.position.set(0, 0, 0)
 		}
 	});
-
-
-
-	
-
-
 	return (
 		<>
-		<Stage adjustCamera={false} shadows={false} preset="rembrandt" intensity={1}  environment="forest">
-		<group ref={item}>{html}</group>
-		</Stage>
-		<OrbitControls enablePan={false} enableZoom={false}/>
+		{/* <Environment files={window.hdr.src}/> */}
+			<Stage adjustCamera={false} shadows={false} preset="rembrandt" intensity={4}  environment="">
+				<group ref={item}>{html}</group>
+			</Stage>
+			<OrbitControls enablePan={false} enableZoom={false}/>
 		</>
 	)
 }
 
-//ui ux
 export default function Scene01({game}) {
-	useEffect(() => {
-        Rune.actions.startGame();
-    }, [])
-	
 	function onAccept(){
+		if (global != 0) return
 		Rune.actions.accept();
 		global = 1;
 		setTimeout(() => {
@@ -121,7 +112,8 @@ export default function Scene01({game}) {
 		}, 1500);
 	}
 
-	function onReject(){
+	function onReject() {
+		if (global != 0) return
 		Rune.actions.reject();
 		global = 2;
 		setTimeout(() => {
@@ -132,8 +124,8 @@ export default function Scene01({game}) {
 	let chrono = useRef();
 	const tick = () => {
         const value = 20 - (Rune.gameTime()-game.roundStartAt) / 1000
-		if (chrono.current && game.start)
-			chrono.current.textContent = value;
+		if (chrono.current && game.start && global == 0)
+			chrono.current.textContent = "00:" + String(value).padStart(2, '0');
         requestAnimationFrame(tick)
 	}
 	tick();

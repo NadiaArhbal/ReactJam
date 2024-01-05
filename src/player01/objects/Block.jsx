@@ -8,4 +8,3 @@ export function Block(props) {
     );
 }
 
-useGLTF.preload("/blocks/Block01.glb");
