@@ -1,5 +1,4 @@
-[
-    {
+[{
         "name": "blocks",
         "parts": [
             { "name": "Mark", "occurences": 4 },
@@ -13,6 +12,12 @@
             { "name": "Switch", "occurences": 2 },
             { "name": "PadLeft", "occurences": 2 },
             { "name": "PadRight", "occurences": 2 }
+        ]
+    },
+    {
+        "name": "puddings",
+        "parts": [
+            { "name": "pudding", "occurences": 1 }
         ]
     }
 

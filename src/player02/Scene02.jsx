@@ -24,7 +24,10 @@ export default function Scene02({game}) {
         requestAnimationFrame(tick);
 	}
 	tick();
-
+	let curtain = useRef();
+	if (game.curtain == 1)
+		if(curtain.current)
+				curtain.current.style.top = "-110%";
 	return (
 		<>
 			<Canvas shadows camera={{ zoom: 0.15, fov: 20 }}>
@@ -35,6 +38,7 @@ export default function Scene02({game}) {
 			</Canvas>
 
 			<div id="ui">
+				<div id="curtain" ref={curtain}></div> {/*for the loading page */}
 				<div id="fail">
 						{[...Array(game.fails)].map((x, i) =>
 						<svg key={i} width="2em" height="2em" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">

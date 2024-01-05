@@ -3,6 +3,7 @@ import { OrbitControls, useGLTF, Stage, Environment, Preload } from "@react-thre
 import data from "../assets/objects.json"
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import { useState } from 'react';
 
 let global = 0;
 
@@ -129,12 +130,21 @@ export default function Scene01({game}) {
         requestAnimationFrame(tick)
 	}
 	tick();
-	
+	let curtain = useRef();
+	if (!game.start)
+		setTimeout(() => {
+			Rune.actions.startGame();
+			Rune.actions.openCurtain();
+			console.log(curtain);
+			if(curtain.current)
+				curtain.current.style.top = "-110%";
+		}, 3000);
 	return (
 		<>
 			<Canvas shadows camera={{ zoom: 0.15, fov: 20 }}><Game game={game}></Game></Canvas>
-
+			
 			<div id="ui">
+				<div id="curtain" ref={curtain}></div> {/*for the loading page */}
 				<div>
 					<button id="accept" onClick={onAccept}>Accept</button>
 					<button id="reject" onClick={onReject}>Reject</button>

@@ -26,7 +26,6 @@ function factory(game) {
                 possibilities.push(i + 1);
             }
         }
-
         let random = possibilities[getRandomInt(item.parts[changeOneElement].occurences - 1)];
         game.model2[changeOneElement] = random;
     }
@@ -53,6 +52,7 @@ Rune.initLogic({
             roundStartAt: 0,
             start: false,
             item: 0,
+            curtain: 0
         }
     },
     actions: {
@@ -69,7 +69,7 @@ Rune.initLogic({
         },
         checkIfCorrect: (object, { game }) => {
             game.roundStartAt = Rune.gameTime();
-            game.success = (game.solution == game.choice); 
+            game.success = (game.solution == game.choice);
             if (game.success == 0)
                 game.fails++;
             if (game.fails == 3) {
@@ -85,12 +85,14 @@ Rune.initLogic({
                 game.score += 2;
             }
             factory(game);
-
         },
+        openCurtain: (object, { game }) => {
+            game.curtain = 1;
+        }
     },
     update: ({ game }) => {
         if (!game.start) return;
-        if (Rune.gameTime() - game.roundStartAt >= 20*1000) {
+        if (Rune.gameTime() - game.roundStartAt >= 20 * 1000) {
             game.roundStartAt = Rune.gameTime();
             game.fails++;
             if (game.fails == 3) {
