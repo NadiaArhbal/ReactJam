@@ -7,19 +7,9 @@ export default function Scene02({game}) {
 
 	var model2 = [];
 
-	for(let i=0; i<data.parts.length; i++){
-		const t = "blocks/" + data.parts[i].name + "0" + game.model2[i] + ".glb";   
+	for(let i=0; i<data[game.item].parts.length; i++){
+		const t = data[game.item].name + "/" + data[game.item].parts[i].name + "0" + game.model2[i] + ".glb";   
 		model2.push(useGLTF(t));
-	}
-
-	function onAccept(){
-		Rune.actions.accept();
-		Rune.actions.checkIfCorrect();
-	}
-
-	function onReject(){
-		Rune.actions.reject();
-		Rune.actions.checkIfCorrect();
 	}
 	
 	let html = model2.map((model, index) =>
@@ -38,7 +28,7 @@ export default function Scene02({game}) {
 	return (
 		<>
 			<Canvas shadows camera={{ zoom: 0.15, fov: 20 }}>
-				<Stage adjustCamera={false} shadows={false} preset="rembrandt" intensity={4}  environment="">
+				<Stage adjustCamera={false} shadows={false} preset="rembrandt" intensity={1}>
 					<group>{html}</group>
 				</Stage>
 				<OrbitControls enablePan={false} enableZoom={false}/>

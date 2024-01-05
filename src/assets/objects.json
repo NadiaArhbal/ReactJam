@@ -1,8 +1,19 @@
-{
-    "name": "Block",
-    "parts": [
-        { "name": "Mark", "occurences": 4 },
-        { "name": "Hole", "occurences": 3 },
-        { "name": "Block", "occurences": 2 }
-    ]
-}
+[
+    {
+        "name": "blocks",
+        "parts": [
+            { "name": "Mark", "occurences": 4 },
+            { "name": "Hole", "occurences": 3 },
+            { "name": "Block", "occurences": 2 }
+        ]
+    },
+    {
+        "name": "switchs",
+        "parts": [
+            { "name": "Switch", "occurences": 2 },
+            { "name": "PadLeft", "occurences": 2 },
+            { "name": "PadRight", "occurences": 2 }
+        ]
+    }
+
+]

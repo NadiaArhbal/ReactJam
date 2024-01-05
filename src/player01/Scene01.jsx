@@ -11,8 +11,8 @@ function Game({game}){  //composant react en Majuscule
 	
 	var model1 = [];
 
-	for(let i=0; i<data.parts.length; i++){
-		const t = "blocks/" + data.parts[i].name + "0" + game.model1[i] + ".glb";   //le serveur qui génère le nb random 
+	for(let i=0; i<data[game.item].parts.length; i++){
+		const t = data[game.item].name + "/" + data[game.item].parts[i].name + "0" + game.model1[i] + ".glb";   
 		model1.push(useGLTF(t));
 	}
 
@@ -93,7 +93,7 @@ function Game({game}){  //composant react en Majuscule
 	return (
 		<>
 		{/* <Environment files={window.hdr.src}/> */}
-			<Stage adjustCamera={false} shadows={false} preset="rembrandt" intensity={4}  environment="">
+			<Stage adjustCamera={false} shadows={false} preset="rembrandt" intensity={1}>
 				<group ref={item}>{html}</group>
 			</Stage>
 			<OrbitControls enablePan={false} enableZoom={false}/>

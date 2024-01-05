@@ -9,23 +9,25 @@ function factory(game) {
     game.solution = random;
     game.model1 = [];
     game.model2 = [];
+    game.item = getRandomInt(data.length);
+    let item = data[game.item]
 
-    for (let i = 0; i < data.parts.length; i++) {
-        let random = getRandomInt(data.parts[i].occurences) + 1;
+    for (let i = 0; i < item.parts.length; i++) {
+        let random = getRandomInt(item.parts[i].occurences) + 1;
         game.model1.push(random);
         game.model2.push(random);
     }
     if (game.solution == 0) {
-        let changeOneElement = getRandomInt(data.parts.length);
+        let changeOneElement = getRandomInt(item.parts.length);
 
         let possibilities = [];
-        for (let i = 0; i < data.parts[changeOneElement].occurences; i++) {
+        for (let i = 0; i < item.parts[changeOneElement].occurences; i++) {
             if (game.model1[changeOneElement] != i + 1) {
                 possibilities.push(i + 1);
             }
         }
 
-        let random = possibilities[getRandomInt(data.parts[changeOneElement].occurences - 1)];
+        let random = possibilities[getRandomInt(item.parts[changeOneElement].occurences - 1)];
         game.model2[changeOneElement] = random;
     }
 }
@@ -49,7 +51,8 @@ Rune.initLogic({
                 1, 1, 1
             ],
             roundStartAt: 0,
-            start: false
+            start: false,
+            item: 0,
         }
     },
     actions: {
