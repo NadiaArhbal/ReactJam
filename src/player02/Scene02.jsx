@@ -34,6 +34,7 @@ export default function Scene02({game}) {
 				<Stage adjustCamera={false} shadows={false} preset="rembrandt" intensity={1}>
 					<group>{html}</group>
 				</Stage>
+				<color args={ [ '#ffd166' ] } attach="background" />
 				<OrbitControls enablePan={false} enableZoom={false}/>
 			</Canvas>
 

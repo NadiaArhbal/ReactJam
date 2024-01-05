@@ -141,7 +141,11 @@ export default function Scene01({game}) {
 		}, 3000);
 	return (
 		<>
-			<Canvas shadows camera={{ zoom: 0.15, fov: 20 }}><Game game={game}></Game></Canvas>
+			<Canvas shadows camera={{ zoom: 0.15, fov: 20 }}><Game game={game}>
+				{/* <color attach="background" args={["#ffd166"]} /> */}
+				</Game>
+				<color args={ [ '#ffd166' ] } attach="background" />
+			</Canvas>
 			
 			<div id="ui">
 				<div id="curtain" ref={curtain}></div> {/*for the loading page */}
