@@ -135,7 +135,6 @@ export default function Scene01({game}) {
 		setTimeout(() => {
 			Rune.actions.startGame();
 			Rune.actions.openCurtain();
-			console.log(curtain);
 			if(curtain.current)
 				curtain.current.style.top = "-110%";
 		}, 3000);
@@ -144,7 +143,7 @@ export default function Scene01({game}) {
 			<Canvas shadows camera={{ zoom: 0.15, fov: 20 }}><Game game={game}>
 				{/* <color attach="background" args={["#ffd166"]} /> */}
 				</Game>
-				<color args={ [ '#ffd166' ] } attach="background" />
+				<color args={ [ '#faf7f0' ] } attach="background" />
 			</Canvas>
 			
 			<div id="ui">
