@@ -1,4 +1,5 @@
-[{
+[
+    {
         "name": "blocks",
         "parts": [
             { "name": "Mark", "occurences": 4 },
@@ -18,6 +19,54 @@
         "name": "puddings",
         "parts": [
             { "name": "Pudding", "occurences": 1 }
+        ]
+    },
+    {
+        "name": "pools",
+        "parts": [
+            { "name": "Pool", "occurences": 2 }
+        ]
+    },
+    {
+        "name": "coffees",
+        "parts": [
+            { "name": "Coffee", "occurences": 2 }
+        ]
+    },
+    {
+        "name": "compass",
+        "parts": [
+            { "name": "Compass", "occurences": 2 }
+        ]
+    },
+    {
+        "name": "gifts",
+        "parts": [
+            { "name": "Gift", "occurences": 2 }
+        ]
+    },
+    {
+        "name": "guitars",
+        "parts": [
+            { "name": "Guitar", "occurences": 2 }
+        ]
+    },
+    {
+        "name": "imacs",
+        "parts": [
+            { "name": "iMac", "occurences": 2 }
+        ]
+    },
+    {
+        "name": "laravels",
+        "parts": [
+            { "name": "Laravel", "occurences": 2 }
+        ]
+    },
+    {
+        "name": "pictos",
+        "parts": [
+            { "name": "Picto", "occurences": 2 }
         ]
     }
 
