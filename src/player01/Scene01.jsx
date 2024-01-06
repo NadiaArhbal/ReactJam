@@ -4,6 +4,8 @@ import data from "../assets/objects.json"
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { useState } from 'react';
+import { Pudding } from '../objects/Pudding';
+
 
 let global = 0;
 
@@ -11,14 +13,19 @@ let global = 0;
 function Game({game}){  //composant react en Majuscule
 	
 	var model1 = [];
-
-	for(let i=0; i<data[game.item].parts.length; i++){
-		const t = data[game.item].name + "/" + data[game.item].parts[i].name + "0" + game.model1[i] + ".glb";   
-		model1.push(useGLTF(t));
+	let html;
+	// pudding !
+	if (game.item == 2) html = <Pudding></Pudding>
+	else {
+		for(let i=0; i<data[game.item].parts.length; i++){
+			const t = data[game.item].name + "/" + data[game.item].parts[i].name + "0" + game.model1[i] + ".glb";   
+			model1.push(useGLTF(t));
+		}
+	
+		html = model1.map((model, index) =>
+			<primitive key={index} object={model.scene} position={[0, 0, 0]} />)
 	}
-
-	let html = model1.map((model, index) =>
-		<primitive key={index} object={model.scene} position={[0, 0, 0]} />)
+	
 
 	const item  = useRef();
 	useFrame((state) => {

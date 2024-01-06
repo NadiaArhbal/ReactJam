@@ -2,19 +2,26 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, useGLTF, Stage } from "@react-three/drei"
 import data from "../assets/objects.json"
 import { useRef } from 'react';
+import { Pudding } from '../objects/Pudding';
 
 export default function Scene02({game}) {
 
 	var model2 = [];
-
-	for(let i=0; i<data[game.item].parts.length; i++){
-		const t = data[game.item].name + "/" + data[game.item].parts[i].name + "0" + game.model2[i] + ".glb";   
-		model2.push(useGLTF(t));
+	let html;
+	// pudding !
+	if (game.item == 2) html = <Pudding></Pudding>
+	else {
+		for(let i=0; i<data[game.item].parts.length; i++){
+			const t = data[game.item].name + "/" + data[game.item].parts[i].name + "0" + game.model2[i] + ".glb";   
+			model2.push(useGLTF(t));
+		}
+		
+		html = model2.map((model, index) =>
+			<primitive key={index} object={model.scene} position={[0, 0, 0]} />
+		)
 	}
 	
-	let html = model2.map((model, index) =>
-	<primitive key={index} object={model.scene} position={[0, 0, 0]} />
-	)
+	
 
 	let chrono = useRef();
 	const tick = () => {

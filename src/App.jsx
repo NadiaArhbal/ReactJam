@@ -3,6 +3,7 @@ import React from 'react'
 import "./App.css"
 import Scene01 from "./player01/Scene01"
 import Scene02 from "./player02/Scene02";
+import { useGLTF } from "@react-three/drei";
 
 function App() {
     const [game, setGame] = useState()
@@ -28,3 +29,5 @@ function App() {
 }
 
 export default App
+
+useGLTF.preload("./puddings/Pudding01.glb");
