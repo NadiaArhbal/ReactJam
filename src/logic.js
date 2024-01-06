@@ -55,12 +55,16 @@ Rune.initLogic({
             roundStartAt: 0,
             start: false,
             item: 0,
-            curtain: 0
+            curtain: 0,
+            global: 0
         }
     },
     actions: {
         accept: (object, { game }) => {
             game.choice = 1
+        },
+        changeGlobal: (value, { game }) => {
+            game.global = value
         },
         startGame: (object, { game }) => {
             game.start = true

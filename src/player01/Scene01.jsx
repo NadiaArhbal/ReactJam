@@ -7,8 +7,6 @@ import { useState } from 'react';
 import { Pudding } from '../objects/Pudding';
 
 
-let global = 0;
-
 //canva
 function Game({game}){  //composant react en Majuscule
 	
@@ -29,7 +27,7 @@ function Game({game}){  //composant react en Majuscule
 
 	const item  = useRef();
 	useFrame((state) => {
-		if (global == 1){
+		if (game.global == 1){
 
 			gsap.to(state.camera.position, {
 				duration:0.5,
@@ -60,10 +58,10 @@ function Game({game}){  //composant react en Majuscule
 				y: -7,
 				delay: 0.5
 			});
-			global = 4
+			Rune.actions.changeGlobal(4)
 
 		}
-		else if (global == 2){
+		else if (game.global == 2){
 			gsap.to(state.camera.position, {
 				duration:0.5,
 				ease: "power2.out",
@@ -92,9 +90,9 @@ function Game({game}){  //composant react en Majuscule
 				y: -7,
 				delay: 0.5
 			});
-			global = 4
+			Rune.actions.changeGlobal(4)
 
-		} else if (global == 0) {
+		} else if (game.global == 0) {
 			item.current.position.set(0, 0, 0)
 		}
 	});
@@ -111,28 +109,28 @@ function Game({game}){  //composant react en Majuscule
 
 export default function Scene01({game}) {
 	function onAccept(){
-		if (global != 0) return
+		if (game.global != 0) return
 		Rune.actions.accept();
-		global = 1;
+		Rune.actions.changeGlobal(1)
 		setTimeout(() => {
-			global=0;
+			Rune.actions.changeGlobal(0);
 			Rune.actions.checkIfCorrect();
 		}, 1500);
 	}
 
 	function onReject() {
-		if (global != 0) return
+		if (game.global != 0) return
 		Rune.actions.reject();
-		global = 2;
+		Rune.actions.changeGlobal(2)
 		setTimeout(() => {
-			global=0;
+			Rune.actions.changeGlobal(0)
 			Rune.actions.checkIfCorrect();
 		}, 1500);
 	}
 	let chrono = useRef();
 	const tick = () => {
         const value = 20 - (Rune.gameTime()-game.roundStartAt) / 1000
-		if (chrono.current && game.start && global == 0)
+		if (chrono.current && game.start && game.global == 0)
 			chrono.current.textContent = "00:" + String(value).padStart(2, '0');
         requestAnimationFrame(tick)
 	}
