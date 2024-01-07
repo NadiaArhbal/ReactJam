@@ -1,12 +1,12 @@
 import { Canvas, useFrame } from '@react-three/fiber'
-import { OrbitControls, useGLTF, Stage } from "@react-three/drei"
+import { OrbitControls, useGLTF, Stage, Environment } from "@react-three/drei"
 import data from "../assets/objects.json"
-import { useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import { Pudding } from '../objects/Pudding';
 import gsap from 'gsap';
 
 
-
+let anim = 0;
 function Game({game}) { 
 
 	var model2 = [];
@@ -26,82 +26,14 @@ function Game({game}) {
 
 	const item  = useRef();
 	useFrame((state) => {
-		if (game.global == 1){
-
-			gsap.to(state.camera.position, {
-				duration:0.5,
-				ease: "power2.out",
-				x: 0,
-				y: 0,
-				z: 5
-			});
-			
-			gsap.to(state.camera.rotation, {
-				duration:0.5,
-				ease: "power2.out",
-				x: 0,
-				y: 0,
-				z: 0,
-			});
-
-			gsap.to(item.current.position, {
-				duration:1,
-				ease: "power4.out",
-				x: 5.5,
-				delay: 0.5
-			});
-
-			gsap.to(item.current.position, {
-				duration:1,
-				ease: "power1.out",
-				y: -7,
-				delay: 0.5
-			});
-			Rune.actions.changeGlobal(4)
-
-		}
-		else if (game.global == 2){
-			gsap.to(state.camera.position, {
-				duration:0.5,
-				ease: "power2.out",
-				x: 0,
-				y: 0,
-				z: 5
-			});
-			gsap.to(state.camera.rotation, {
-				duration:0.5,
-				ease: "power2.out",
-				x: 0,
-				y: 0,
-				z: 0,
-			});
-
-			gsap.to(item.current.position, {
-				duration:1,
-				ease: "power4.out",
-				x: -5.5,
-				delay: 0.5
-			});
-
-			gsap.to(item.current.position, {
-				duration:1,
-				ease: "power1.out",
-				y: -7,
-				delay: 0.5
-			});
-			Rune.actions.changeGlobal(4)
-
-		} else if (game.global == 0) {
-			item.current.position.set(0, 0, 0)
-		}
 	});
 
 	return (
 		<>
-			<Stage adjustCamera={false} shadows={false} preset="rembrandt" intensity={1}>
-					<group ref={item}>{html}</group>
-				</Stage>
-				<color args={ [ '#faf7f0' ] } attach="background" />
+			<Stage environment={false} adjustCamera={false} shadows={false} preset="rembrandt" intensity={7}>
+				<group ref={item}>{html}</group>
+			</Stage>
+			<color args={ [ '#faf7f0' ] } attach="background" />
 			<OrbitControls enablePan={false} enableZoom={false}/>
 		</>
 	)
@@ -111,16 +43,19 @@ export default function Scene02({game}) {
 
 	let chrono = useRef();
 	const tick = () => {
-        const value = 20 - (Rune.gameTime()-game.roundStartAt) / 1000
+        const value = 120 - (Rune.gameTime()-game.roundStartAt) / 1000
 		if (chrono.current && game.start)
-			chrono.current.textContent = "00:" + String(value).padStart(2, '0');
+			chrono.current.textContent = "0" + Math.floor(value / 60) + ":" + String(value % 60).padStart(2, '0');
         requestAnimationFrame(tick);
 	}
 	tick();
-	let curtain = useRef();
-	if (game.curtain == 1)
-		if (curtain.current)
-				curtain.current.style.top = "-110%";
+	const curtain = useCallback(node => {
+		if (node !== null) {
+			setTimeout(() => {
+				node.style.top = "-110%";
+			}, 5000);
+		}
+	  }, []);
 	return (
 		<>
 			<Canvas shadows camera={{ zoom: 0.15, fov: 20 }}>

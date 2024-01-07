@@ -56,15 +56,27 @@ Rune.initLogic({
             start: false,
             item: 0,
             curtain: 0,
-            global: 0
+            global1: 0,
+            global2: 0,
+            ready1: 0,
+            ready2: 0
         }
     },
     actions: {
+        onReady:(object, {game}) => {
+            if (object == 1)
+                game.ready1 += 1;
+            else
+                game.ready2 += 1;
+        },
         accept: (object, { game }) => {
             game.choice = 1
         },
-        changeGlobal: (value, { game }) => {
-            game.global = value
+        changeGlobal1: (value, { game }) => {
+            game.global1 = value
+        },
+        changeGlobal2: (value, { game }) => {
+            game.global2 = value
         },
         startGame: (object, { game }) => {
             game.start = true
@@ -75,7 +87,7 @@ Rune.initLogic({
             game.choice = 0
         },
         checkIfCorrect: (object, { game }) => {
-            game.roundStartAt = Rune.gameTime();
+            // game.roundStartAt = Rune.gameTime();
             game.success = (game.solution == game.choice);
             if (game.success == 0)
                 game.fails++;
@@ -99,17 +111,14 @@ Rune.initLogic({
     },
     update: ({ game }) => {
         if (!game.start) return;
-        if (Rune.gameTime() - game.roundStartAt >= 20 * 1000) {
-            game.roundStartAt = Rune.gameTime();
-            game.fails++;
-            if (game.fails == 3) {
-                Rune.gameOver({
-                    players: {
-                        [game.players[0]]: "LOST",
-                        [game.players[1]]: "LOST",
-                    },
-                })
-            }
+        if (Rune.gameTime() - game.roundStartAt >= 120 * 1000) {
+            // game.roundStartAt = Rune.gameTime();
+            Rune.gameOver({
+                players: {
+                    [game.players[0]]: game.score,
+                    [game.players[1]]: game.score,
+                },
+            })
             factory(game);
         }
     }
