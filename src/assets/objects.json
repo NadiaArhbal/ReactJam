@@ -1,5 +1,4 @@
-[
-    {
+[{
         "name": "blocks",
         "parts": [
             { "name": "Mark", "occurences": 4 },
@@ -13,12 +12,6 @@
             { "name": "Switch", "occurences": 2 },
             { "name": "PadLeft", "occurences": 2 },
             { "name": "PadRight", "occurences": 2 }
-        ]
-    },
-    {
-        "name": "puddings",
-        "parts": [
-            { "name": "Pudding", "occurences": 1 }
         ]
     },
     {
@@ -67,6 +60,17 @@
         "name": "pictos",
         "parts": [
             { "name": "Picto", "occurences": 2 }
+        ]
+    },
+    {
+        "name": "vase",
+        "parts": [
+            { "name": "vase", "occurences": 4 }
+        ]
+    }, {
+        "name": "vase2",
+        "parts": [
+            { "name": "vase02_", "occurences": 3 }
         ]
     }
 

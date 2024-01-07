@@ -13,8 +13,8 @@ function Game({game}){  //composant react en Majuscule
 	var model1 = [];
 	let html;
 	// pudding !
-	if (game.item == 2) html = <Pudding></Pudding>
-	else {
+	// if (game.item == 2) html = <Pudding></Pudding>
+	// else {
 		for(let i=0; i<data[game.item].parts.length; i++){
 			const t = data[game.item].name + "/" + data[game.item].parts[i].name + "0" + game.model1[i] + ".glb";   
 			model1.push(useGLTF(t));
@@ -22,7 +22,7 @@ function Game({game}){  //composant react en Majuscule
 	
 		html = model1.map((model, index) =>
 			<primitive key={index} object={model.scene} position={[0, 0, 0]} />)
-	}
+	// }
 	
 
 	const item  = useRef();
