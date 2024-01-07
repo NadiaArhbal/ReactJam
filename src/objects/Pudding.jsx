@@ -6,14 +6,14 @@ import * as THREE from 'three'
 
 
 export function Pudding(props) {
-    const { nodes, materials } = useGLTF("/puddings/Pudding01.glb");
+    const { nodes, materials } = useGLTF("puddings/Pudding01.glb");
   
     const config = {
         meshPhysicalMaterial: false,
         transmissionSampler: true,
         backside: false,
-        samples: 8,
-        resolution: 256,
+        samples: 2,
+        resolution: 32,
         transmission: 1,
         roughness: 0.5,
         thickness: 3.5,
