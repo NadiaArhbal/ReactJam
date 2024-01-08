@@ -31,7 +31,7 @@ function Game({game}) {
 	return (
 		<>
 			<Stage environment={false} adjustCamera={false} shadows={false} preset="rembrandt" intensity={7}>
-				<group ref={item}>{html}</group>
+				<group position={[0, 0, 0]} ref={item}>{html}</group>
 			</Stage>
 			<color args={ [ '#faf7f0' ] } attach="background" />
 			<OrbitControls enablePan={false} enableZoom={false}/>
@@ -53,7 +53,7 @@ export default function Scene02({game}) {
 		if (node !== null) {
 			setTimeout(() => {
 				node.style.top = "-110%";
-			}, 5000);
+			}, 2000);
 		}
 	  }, []);
 	return (

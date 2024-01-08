@@ -67,11 +67,5 @@
         "parts": [
             { "name": "vase", "occurences": 4 }
         ]
-    }, {
-        "name": "vase2",
-        "parts": [
-            { "name": "vase02_", "occurences": 3 }
-        ]
     }
-
 ]
