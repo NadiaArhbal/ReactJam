@@ -12,8 +12,8 @@ function Game({game}) {
 	var model2 = [];
 	let html;
 	// pudding !
-	if (game.item == 2) html = <Pudding></Pudding>
-	else {
+	// if (game.item == 2) html = <Pudding></Pudding>
+	// else {
 		for(let i=0; i<data[game.item].parts.length; i++){
 			const t = data[game.item].name + "/" + data[game.item].parts[i].name + "0" + game.model2[i] + ".glb";   
 			model2.push(useGLTF(t));
@@ -22,7 +22,7 @@ function Game({game}) {
 		html = model2.map((model, index) =>
 			<primitive key={index} object={model.scene} position={[0, 0, 0]} />
 		)
-	}
+	// }
 
 	const item  = useRef();
 	useFrame((state) => {
@@ -31,7 +31,7 @@ function Game({game}) {
 	return (
 		<>
 			<Stage environment={false} adjustCamera={false} shadows={false} preset="rembrandt" intensity={7}>
-				<group ref={item}>{html}</group>
+				<group position={[0, 0, 0]} ref={item}>{html}</group>
 			</Stage>
 			<color args={ [ '#faf7f0' ] } attach="background" />
 			<OrbitControls enablePan={false} enableZoom={false}/>
@@ -53,7 +53,7 @@ export default function Scene02({game}) {
 		if (node !== null) {
 			setTimeout(() => {
 				node.style.top = "-110%";
-			}, 5000);
+			}, 2000);
 		}
 	  }, []);
 	return (

@@ -14,8 +14,8 @@ function Game({game}){  //composant react en Majuscule
 	var model1 = [];
 	let html;
 	// pudding !
-	if (game.item == 2) html = <Pudding></Pudding>
-	else {
+	// if (game.item == 2) html = <Pudding></Pudding>
+	// else {
 		for(let i=0; i<data[game.item].parts.length; i++){
 			const t = data[game.item].name + "/" + data[game.item].parts[i].name + "0" + game.model1[i] + ".glb";   
 			model1.push(useGLTF(t));
@@ -23,7 +23,7 @@ function Game({game}){  //composant react en Majuscule
 	
 		html = model1.map((model, index) =>
 			<primitive key={index} object={model.scene} position={[0, 0, 0]} />)
-	}
+	// }
 	
 
 	const item  = useRef();
@@ -32,7 +32,7 @@ function Game({game}){  //composant react en Majuscule
 	return (
 		<>
 			<Stage environment={false} adjustCamera={false} shadows={false} preset="rembrandt" intensity={7}>
-				<group ref={item}>{html}</group>
+				<group position={[0, 0, 0]} ref={item}>{html}</group>
 			</Stage>
 			<OrbitControls enablePan={false} enableZoom={false}/>
 		</>
@@ -79,14 +79,14 @@ export default function Scene01({game}) {
 		if (node !== null) {
 			setTimeout(() => {
 				node.style.top = "-110%";
-			}, 5000);
+			}, 2000);
 		}
 	  }, []);
 	if (wait)
 		setTimeout(() => {
 			Rune.actions.startGame();
 			Rune.actions.openCurtain();
-		}, 5000);
+		}, 2000);
 		wait = false;
 	return (
 		<>
@@ -99,8 +99,8 @@ export default function Scene01({game}) {
 			<div id="ui">
 				<div id="curtain" ref={curtain}></div> {/*for the loading page */}
 				<div>
-					<button id="accept" onClick={onAccept}>Accept</button>
-					<button id="reject" onClick={onReject}>Reject</button>
+					<button id="accept" onClick={onAccept}>OK</button>
+					<button id="reject" onClick={onReject}>NOOK</button>
 				</div>
 				<div id="fail">
 					{[...Array(game.fails)].map((x, i) =>

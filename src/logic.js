@@ -13,7 +13,7 @@ function factory(game) {
     let item = data[game.item]
 
     // pudding !
-    if (game.item == 2) game.solution = 1;
+    // if (game.item == 2) game.solution = 1;
 
     for (let i = 0; i < item.parts.length; i++) {
         let random = getRandomInt(item.parts[i].occurences) + 1;
