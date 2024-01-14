@@ -1,34 +1,22 @@
-import { Canvas, useFrame } from '@react-three/fiber'
-import { OrbitControls, useGLTF, Stage, Environment, Preload } from "@react-three/drei"
+import { Canvas } from '@react-three/fiber'
+import { OrbitControls, useGLTF, Stage } from "@react-three/drei"
 import data from "../assets/objects.json"
-import { useCallback, useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { useState } from 'react';
-import { Pudding } from '../objects/Pudding';
+import { useCallback, useRef } from 'react';
 
-let wait = true;
-let anim = 0;
-//canva
-function Game({game}){  //composant react en Majuscule
-	
+
+function Game({ game }){ 
 	var model1 = [];
 	let html;
-	// pudding !
-	// if (game.item == 2) html = <Pudding></Pudding>
-	// else {
-		for(let i=0; i<data[game.item].parts.length; i++){
-			const t = data[game.item].name + "/" + data[game.item].parts[i].name + "0" + game.model1[i] + ".glb";   
-			model1.push(useGLTF(t));
-		}
-	
-		html = model1.map((model, index) =>
-			<primitive key={index} object={model.scene} position={[0, 0, 0]} />)
-	// }
-	
 
+	for(let i=0; i<data[game.item].parts.length; i++){
+		const t = data[game.item].name + "/" + data[game.item].parts[i].name + "0" + game.model1[i] + ".glb";   
+		model1.push(useGLTF(t));
+	}
+
+	html = model1.map((model, index) =>
+		<primitive key={index} object={model.scene} position={[0, 0, 0]} />)
+	
 	const item  = useRef();
-	useFrame((state) => {
-	});
 	return (
 		<>
 			<Stage environment={false} adjustCamera={false} shadows={false} preset="rembrandt" intensity={7}>
@@ -41,57 +29,39 @@ function Game({game}){  //composant react en Majuscule
 
 export default function Scene01({game}) {
 	function onAccept(){
-		if (game.global1 == 5) return
+		if (game.end) return
 		Rune.actions.accept();
-		Rune.actions.changeGlobal1(1);
-		Rune.actions.changeGlobal2(1);
 		setTimeout(() => {
 			Rune.actions.checkIfCorrect();
 		}, 1000);
-		setTimeout(() => {
-			Rune.actions.changeGlobal1(0)
-			Rune.actions.changeGlobal2(0)
-		}, 2000);
 	}
 
 	function onReject() {
-		if (anim == 5) return
+		if (game.end) return
 		Rune.actions.reject();
-		Rune.actions.changeGlobal1(2);
-		Rune.actions.changeGlobal2(2);
 		setTimeout(() => {
 			Rune.actions.checkIfCorrect();
 		}, 1000);
-		setTimeout(() => {
-			Rune.actions.changeGlobal1(0)
-			Rune.actions.changeGlobal2(0)
-		}, 2000);
 	}
 	let chrono = useRef();
 	const tick = () => {
         const value = 120 - (Rune.gameTime()-game.roundStartAt) / 1000;
-		if (chrono.current && game.start)
+		if (chrono.current && game.start && !game.end)
 			chrono.current.textContent = "0" + Math.floor(value / 60) + ":" + String(value % 60).padStart(2, '0');
         requestAnimationFrame(tick)
 	}
 	tick();
 	const curtain = useCallback(node => {
 		if (node !== null) {
+			Rune.actions.openCurtain();
 			setTimeout(() => {
 				node.style.top = "-110%";
-			}, 2000);
+			}, 1000);
 		}
-	  }, []);
-	if (wait)
-		setTimeout(() => {
-			Rune.actions.startGame();
-			Rune.actions.openCurtain();
-		}, 2000);
-		wait = false;
+	}, []);
 	return (
 		<>
 			<Canvas shadows camera={{ zoom: 0.15, fov: 20 }}><Game game={game}>
-				{/* <color attach="background" args={["#ffd166"]} /> */}
 				</Game>
 				<color args={ [ '#faf7f0' ] } attach="background" />
 			</Canvas>

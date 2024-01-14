@@ -12,9 +12,6 @@ function factory(game) {
     game.item = getRandomInt(data.length);
     let item = data[game.item]
 
-    // pudding !
-    // if (game.item == 2) game.solution = 1;
-
     for (let i = 0; i < item.parts.length; i++) {
         let random = getRandomInt(item.parts[i].occurences) + 1;
         game.model1.push(random);
@@ -56,27 +53,12 @@ Rune.initLogic({
             start: false,
             item: 0,
             curtain: 0,
-            global1: 0,
-            global2: 0,
-            ready1: 0,
-            ready2: 0
+            end: 0,
         }
     },
     actions: {
-        onReady:(object, {game}) => {
-            if (object == 1)
-                game.ready1 += 1;
-            else
-                game.ready2 += 1;
-        },
         accept: (object, { game }) => {
             game.choice = 1
-        },
-        changeGlobal1: (value, { game }) => {
-            game.global1 = value
-        },
-        changeGlobal2: (value, { game }) => {
-            game.global2 = value
         },
         startGame: (object, { game }) => {
             game.start = true
@@ -87,17 +69,18 @@ Rune.initLogic({
             game.choice = 0
         },
         checkIfCorrect: (object, { game }) => {
-            // game.roundStartAt = Rune.gameTime();
             game.success = (game.solution == game.choice);
             if (game.success == 0)
                 game.fails++;
             if (game.fails == 3) {
+                game.end = 1;
                 Rune.gameOver({
                     players: {
                         [game.players[0]]: game.score,
                         [game.players[1]]: game.score,
                     },
                 })
+                return ;
             }
 
             if (game.success == 1) {
@@ -112,14 +95,13 @@ Rune.initLogic({
     update: ({ game }) => {
         if (!game.start) return;
         if (Rune.gameTime() - game.roundStartAt >= 120 * 1000) {
-            // game.roundStartAt = Rune.gameTime();
+            game.end = 1;
             Rune.gameOver({
                 players: {
                     [game.players[0]]: game.score,
                     [game.players[1]]: game.score,
                 },
             })
-            factory(game);
         }
     }
 })

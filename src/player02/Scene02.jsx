@@ -1,32 +1,24 @@
-import { Canvas, useFrame } from '@react-three/fiber'
-import { OrbitControls, useGLTF, Stage, Environment } from "@react-three/drei"
+import { Canvas } from '@react-three/fiber'
+import { OrbitControls, useGLTF, Stage } from "@react-three/drei"
 import data from "../assets/objects.json"
 import { useCallback, useRef } from 'react';
-import { Pudding } from '../objects/Pudding';
-import gsap from 'gsap';
 
 
-let anim = 0;
 function Game({game}) { 
 
 	var model2 = [];
 	let html;
-	// pudding !
-	// if (game.item == 2) html = <Pudding></Pudding>
-	// else {
-		for(let i=0; i<data[game.item].parts.length; i++){
-			const t = data[game.item].name + "/" + data[game.item].parts[i].name + "0" + game.model2[i] + ".glb";   
-			model2.push(useGLTF(t));
-		}
-		
-		html = model2.map((model, index) =>
-			<primitive key={index} object={model.scene} position={[0, 0, 0]} />
-		)
-	// }
+
+	for(let i=0; i<data[game.item].parts.length; i++){
+		const t = data[game.item].name + "/" + data[game.item].parts[i].name + "0" + game.model2[i] + ".glb";   
+		model2.push(useGLTF(t));
+	}
+	
+	html = model2.map((model, index) =>
+		<primitive key={index} object={model.scene} position={[0, 0, 0]} />
+	)
 
 	const item  = useRef();
-	useFrame((state) => {
-	});
 
 	return (
 		<>
@@ -44,7 +36,7 @@ export default function Scene02({game}) {
 	let chrono = useRef();
 	const tick = () => {
         const value = 120 - (Rune.gameTime()-game.roundStartAt) / 1000
-		if (chrono.current && game.start)
+		if (chrono.current && game.start && !game.end)
 			chrono.current.textContent = "0" + Math.floor(value / 60) + ":" + String(value % 60).padStart(2, '0');
         requestAnimationFrame(tick);
 	}
@@ -53,7 +45,7 @@ export default function Scene02({game}) {
 		if (node !== null) {
 			setTimeout(() => {
 				node.style.top = "-110%";
-			}, 2000);
+			}, 1000);
 		}
 	  }, []);
 	return (
@@ -63,7 +55,7 @@ export default function Scene02({game}) {
 			</Canvas>
 
 			<div id="ui">
-				<div id="curtain" ref={curtain}></div> {/*for the loading page */}
+				<div id="curtain" ref={curtain}></div>
 				<div id="fail">
 						{[...Array(game.fails)].map((x, i) =>
 						<svg key={i} width="2em" height="2em" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">

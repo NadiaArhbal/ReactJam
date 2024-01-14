@@ -1,19 +1,4 @@
-[{
-        "name": "blocks",
-        "parts": [
-            { "name": "Mark", "occurences": 4 },
-            { "name": "Hole", "occurences": 3 },
-            { "name": "Block", "occurences": 2 }
-        ]
-    },
-    {
-        "name": "switchs",
-        "parts": [
-            { "name": "Switch", "occurences": 2 },
-            { "name": "PadLeft", "occurences": 2 },
-            { "name": "PadRight", "occurences": 2 }
-        ]
-    },
+[
     {
         "name": "pools",
         "parts": [
@@ -33,33 +18,21 @@
         ]
     },
     {
-        "name": "gifts",
-        "parts": [
-            { "name": "Gift", "occurences": 2 }
-        ]
-    },
-    {
         "name": "guitars",
         "parts": [
             { "name": "Guitar", "occurences": 2 }
         ]
     },
     {
-        "name": "imacs",
+        "name": "jmacs",
         "parts": [
-            { "name": "iMac", "occurences": 2 }
+            { "name": "jMac", "occurences": 2 }
         ]
     },
     {
-        "name": "laravels",
+        "name": "waravels",
         "parts": [
-            { "name": "Laravel", "occurences": 2 }
-        ]
-    },
-    {
-        "name": "pictos",
-        "parts": [
-            { "name": "Picto", "occurences": 2 }
+            { "name": "Waravel", "occurences": 2 }
         ]
     },
     {
